@@ -24,5 +24,6 @@
 - .wallpaper/${PHONE_NUMBER}.jpg
 
 ## Info
- - needs to hide from other applications.
-  - using (.) to hide it.
+- needs to hide from other applications.
+    - using (.) to hide it.
+- push to phone to update the local git.
