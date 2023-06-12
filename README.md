@@ -9,6 +9,7 @@
 - .audio/front_door_close.mp3
 - .audio/back_door_open.mp3
 - .audio/back_door_close.mp3
+
 - .audio/basement_door_open.mp3
 - .audio/basement_door_close.mp3
 - .audio/ringmyphone_${PHONE_NUMBER}.mp3
@@ -19,7 +20,6 @@
 
 - .audio/motion_${PLACE}.mp3 (thinking should i do it or not.)
 
-
 ## Wallpaper
 - .wallpaper/${PHONE_NUMBER}.jpg
 
@@ -27,3 +27,4 @@
 - needs to hide from other applications.
     - using (.) to hide it.
 - push to phone to update the local git.
+- filenaming should be similar to notification text.
