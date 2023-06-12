@@ -28,3 +28,4 @@
     - using (.) to hide it.
 - push to phone to update the local git.
 - filenaming should be similar to notification text.
+- colon ':' isn't supported on android.
