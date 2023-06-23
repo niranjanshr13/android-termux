@@ -10,6 +10,6 @@ rm -rf $GIT_REPO_PATH
 git clone $GIT_REPO_URL $GIT_REPO_PATH
 # ssh config
 
-# setuping bashrc
+# setup bashrc
 
 fi
