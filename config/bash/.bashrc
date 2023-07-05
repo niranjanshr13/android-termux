@@ -17,6 +17,11 @@ if ! pgrep -x "cloudflared" >/dev/null; then
     nohup cloudflared tunnel run  >/dev/null 2>&1 &
 fi
 
+# run encrypted command.
+# can't show this to public.
+
+
+
 # running command that will check $termux_reload and termux $TERM
 # just in background on host shell.
 termux_reload='/data/data/com.termux/files/home/storage/shared/termux-reload'
