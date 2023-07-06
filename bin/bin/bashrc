@@ -6,6 +6,10 @@ unset HISTFILE
 # alias.
 alias q='exit'
 alias b='byobu'
+alias h='htop'
+alias v='vim'
+alias rz="rm -rfv $HOME/android-termux"
+alias s="source $HOME/.bashrc"
 
 # scripts.
 rm -f $HOME/.vim $HOME/.viminfo
