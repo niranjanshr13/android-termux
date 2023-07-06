@@ -1,7 +1,6 @@
 #!/bin/bash
-
-GIT_SSH_PATH="$HOME/custom/git"
-GIT_SSH_COMMAND="ssh -i $GIT_SSH_PATH"
+eval `ssh-agent -s`
+ssh-add $HOME/custom/git
 
 GIT_REPO_URL='git@github.com:niranjanshr13/android-termux'
 
