@@ -1,4 +1,4 @@
-echo "source ~/android-termux/bin/bin/bash > ~/.bashrc"
+echo "source $HOME/android-termux/bin/bin/bash > $HOME/.bashrc"
 
 # set variable.
 unset HISTFILE
@@ -8,31 +8,31 @@ alias q='exit'
 alias b='byobu'
 
 # scripts.
-rm ~/.vim ~/.viminfo
+rm $HOME/.vim $HOME/.viminfo
 
 
 # demon
 ## sshd daemon
-nohup bash ~/android-termux/bin/bin/ssh_daemon.sh >/dev/null 2>&1 &
+nohup bash $HOME/android-termux/bin/bin/ssh_daemon.sh >/dev/null 2>&1 &
 
 ## cloudflared
-nohup bash ~/android-termux/bin/bin/cloudflared_auto_start >/dev/null 2>&1 &
+nohup bash $HOME/android-termux/bin/bin/cloudflared_auto_start >/dev/null 2>&1 &
 
 ## tinycam uploader
 ### if server create a file on this path.
-if [[ -f "~/storage/shared/server" ]]
+if [[ -f "$HOME/storage/shared/server" ]]
 then
-nohup bash ~/android-termux/bin/bin/tinycam_uploader.daemon.sh > /dev/null 2>&1 &
+nohup bash $HOME/android-termux/bin/bin/tinycam_uploader.daemon.sh > /dev/null 2>&1 &
 fi
 
 ## git self update
-nohup bash ~/android-termux/bin/bin/git_self_update.daemon.sh > /dev/null 2>&1 &
+nohup bash $HOME/android-termux/bin/bin/git_self_update.daemon.sh > /dev/null 2>&1 &
 
 ## auto restart daemon
-nohup bash ~/android-termux/bin/bin/auto_restart.daemon.sh > /dev/null 2>&1 &
+nohup bash $HOME/android-termux/bin/bin/auto_restart.daemon.sh > /dev/null 2>&1 &
 
 # transferring to its place.
-TRANSFERING_SCRIPT='~/android-termux/bin/bin/transfer.sh'
+TRANSFERING_SCRIPT='$HOME/android-termux/bin/bin/transfer.sh'
 if [[ -f $TRANSFERING_SCRIPT ]];
 then
     bash $TRANSFERING_SCRIPT
