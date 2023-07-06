@@ -3,7 +3,7 @@
 GIT_SSH_PATH="~/custom/git"
 GIT_SSH_COMMAND="ssh -i $GIT_SSH_PATH"
 
-GIT_REPO_URL='https://github.com/niranjanshr13/android-termux'
+GIT_REPO_URL='git@github.com:niranjanshr13/android-termux'
 
 REMOTE_REPO_HEAD=$(git ls-remote $GIT_REPO_URL HEAD | awk {'print $1'})
 GIT_REPO_PATH='~/'
