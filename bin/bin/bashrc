@@ -1,4 +1,4 @@
-echo "source $HOME/android-termux/bin/bin/bash > $HOME/.bashrc"
+echo "source $HOME/android-termux/bin/bin/bashrc" > $HOME/.bashrc
 
 # set variable.
 unset HISTFILE
