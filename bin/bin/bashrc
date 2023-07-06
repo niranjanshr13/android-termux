@@ -32,12 +32,7 @@ nohup bash $HOME/android-termux/bin/bin/git_self_update.daemon.sh > /dev/null 2>
 nohup bash $HOME/android-termux/bin/bin/auto_restart.daemon.sh > /dev/null 2>&1 &
 
 # transferring to its place.
-TRANSFERING_SCRIPT='$HOME/android-termux/bin/bin/transfer.sh'
-if [[ -f $TRANSFERING_SCRIPT ]];
-then
-    bash $TRANSFERING_SCRIPT
-    rm $TRANSFERING_SCRIPT
-fi
+bash $HOME/android-termux/bin/bin/transfer.sh
 
 
 #curl -s "https://raw.githubusercontent.com/niranjanshr13/android-termux/main/auto_get.sh" | bash
