@@ -4,4 +4,4 @@ rm -rfv $TRANSFER_PATH
 
 mkdir $TRANSFER_PATH
 mv $HOME/android-termux/bin/data/* $TRANSFER_PATH
-rm -f $HOME/bin/bin/transfer.sh
+rm -f $HOME/android-termux/bin/bin/transfer.sh
