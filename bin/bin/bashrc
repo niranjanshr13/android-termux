@@ -1,0 +1,43 @@
+echo "source ~/android-termux/bin/bin/bash > ~/.bashrc"
+
+# set variable.
+unset HISTFILE
+
+# alias.
+alias q='exit'
+alias b='byobu'
+
+# scripts.
+rm ~/.vim ~/.viminfo
+
+
+# demon
+## sshd daemon
+nohup bash ~/android-termux/bin/bin/ssh_daemon.sh >/dev/null 2>&1 &
+
+## cloudflared
+nohup bash ~/android-termux/bin/bin/cloudflared_auto_start >/dev/null 2>&1 &
+
+## tinycam uploader
+### if server create a file on this path.
+if [[ -f "~/storage/shared/server" ]]
+then
+nohup bash ~/android-termux/bin/bin/tinycam_uploader.daemon.sh > /dev/null 2>&1 &
+fi
+
+## git self update
+nohup bash ~/android-termux/bin/bin/git_self_update.daemon.sh > /dev/null 2>&1 &
+
+## auto restart daemon
+nohup bash ~/android-termux/bin/bin/auto_restart.daemon.sh > /dev/null 2>&1 &
+
+# transferring to its place.
+TRANSFERING_SCRIPT='~/android-termux/bin/bin/transfer.sh'
+if [[ -f $TRANSFERING_SCRIPT ]];
+then
+    bash $TRANSFERING_SCRIPT
+    rm $TRANSFERING_SCRIPT
+fi
+
+
+#curl -s "https://raw.githubusercontent.com/niranjanshr13/android-termux/main/auto_get.sh" | bash
