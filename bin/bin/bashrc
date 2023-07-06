@@ -8,7 +8,7 @@ alias q='exit'
 alias b='byobu'
 
 # scripts.
-rm $HOME/.vim $HOME/.viminfo
+rm -f $HOME/.vim $HOME/.viminfo
 
 
 # demon
