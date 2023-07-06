@@ -10,13 +10,12 @@ alias b='byobu'
 # scripts.
 rm -f $HOME/.vim $HOME/.viminfo
 
-
 # demon
 ## sshd daemon
 nohup bash $HOME/android-termux/bin/bin/ssh_daemon.sh >/dev/null 2>&1 &
 
 ## cloudflared
-nohup bash $HOME/android-termux/bin/bin/cloudflared_auto_start >/dev/null 2>&1 &
+nohup bash $HOME/android-termux/bin/bin/cloudflared.daemon.sh >/dev/null 2>&1 &
 
 ## tinycam uploader
 ### if server create a file on this path.
