@@ -6,8 +6,13 @@ install termux:tasker
 remove f-droid
 ```
 
-GIT_REPO_URL='git@github.com:niranjanshr13/android-termux'
-GIT_REPO_PATH="$HOME/android-termux"
-git clone git@github.com:niranjanshr13/android-termux $HOME/android-termux
+# initial command
+```
+apt update -y
+apt install git openssh -y
 
+GIT_REPO_URL='https://github.com:niranjanshr13/android-termux'
+GIT_REPO_LOCAL_PATH="$HOME/android-termux"
+git clone $GIT_REPO_URL $GIT_REPO_LOCAL_PATH
 cat "source $HOME/android-termux/config/bashrc" > ~/.bashrc
+```
