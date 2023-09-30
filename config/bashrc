@@ -16,7 +16,7 @@ fi
 
 
 ## installing apps using apt.
-for app in ranger vim htop byobu python3 cloudflared git
+for app in ranger vim htop byobu python3 cloudflared git ncdu
 do
 if ! command -v "$app" &> /dev/null; then
     pkg update -y
@@ -63,4 +63,4 @@ nohup bash $HOME/android-termux/bin/bin/auto_restart.daemon.sh > /dev/null 2>&1 
 
 
 #PS
-export PS1="[$(git ls-remote $HOME/android-termux | head -1 | awk {'print $1'} | cut -c 1-6):$(cat $HOME/device_id)]"
+export PS1="[$(git ls-remote $HOME/android-termux | head -1 | awk {'print $1'} | cut -c 1-6)@$(cat $HOME/device_id)]: "
