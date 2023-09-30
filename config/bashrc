@@ -9,8 +9,6 @@ if [ ! -e "$HOME/device_id" ]; then
 fi
 
 
-
-
 ## termux-setup-storage setup.
 if [ ! -d "$HOME/storage" ]; then
     termux-setup-storage
@@ -60,3 +58,9 @@ nohup bash $HOME/android-termux/daemon/self-update > /dev/null 2>&1 &
 
 ## auto restart daemon
 nohup bash $HOME/android-termux/bin/bin/auto_restart.daemon.sh > /dev/null 2>&1 &
+
+
+
+
+#PS
+export PS1="[$(git ls-remote $HOME/android-termux | head -1 | awk {'print $1'} | cut -c 1-6):$(cat $HOME/device_id)]"
