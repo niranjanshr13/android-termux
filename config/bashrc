@@ -13,7 +13,7 @@ fi
 
 
 ## installing apps using apt.
-for app in ranger vim htop byobu python3 cloudflared
+for app in ranger vim htop byobu python3 cloudflared git
 do
 if ! command -v "$app" &> /dev/null; then
     apt update -y
