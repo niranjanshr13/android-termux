@@ -17,8 +17,8 @@ fi
 for app in ranger vim htop byobu python3 cloudflared git
 do
 if ! command -v "$app" &> /dev/null; then
-    apt update -y
-    apt install -y $app
+    pkg update -y
+    pkg install -y $app
 fi
 done
 
