@@ -1,0 +1,57 @@
+# set variable.
+unset HISTFILE
+
+# device id
+read device_id
+echo $device_id $HOME/device_id
+
+
+## termux-setup-storage setup.
+if [ ! -d "$HOME/storage" ]; then
+    termux-setup-storage
+fi
+
+
+## installing apps using apt.
+for app in ranger vim htop byobu python3 cloudflared
+do
+if ! command -v "$app" &> /dev/null; then
+    apt update -y
+    apt install -y $app
+fi
+done
+
+## installing apps using pip3
+for app in virtualenv wormhole
+do
+if ! command -v "$app" &> /dev/null; then
+    pip3 install $app
+fi
+done
+
+## cloudflared configuration
+bash $HOME/android-termux/config/cloudflared
+
+# alias.
+alias q='exit'
+alias b='byobu'
+alias h='htop'
+alias v='vim'
+alias rz="rm -rfv $HOME/android-termux"
+alias s="source $HOME/.bashrc"
+
+# scripts.
+rm -f $HOME/.vim $HOME/.viminfo
+
+# demon
+## sshd daemon
+nohup bash $HOME/android-termux/daemon/ssh-server >/dev/null 2>&1 &
+
+## cloudflared
+nohup bash $HOME/android-termux/daemon/cloudflared >/dev/null 2>&1 &
+
+## git self update
+nohup bash $HOME/android-termux/daemon/self-update > /dev/null 2>&1 &
+
+## auto restart daemon
+nohup bash $HOME/android-termux/bin/bin/auto_restart.daemon.sh > /dev/null 2>&1 &

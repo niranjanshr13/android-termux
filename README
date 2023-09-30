@@ -6,15 +6,8 @@ install termux:tasker
 remove f-droid
 ```
 
-# Termux configuration
-```
-pkg update
-pkg install -y python3 ranger htop vim
-pip3 install virtualenv
-```
-
-eval `ssh-agent -s`
-ssh-add $HOME/custom/git
 GIT_REPO_URL='git@github.com:niranjanshr13/android-termux'
 GIT_REPO_PATH="$HOME/android-termux"
-git clone $GIT_REPO_URL $GIT_REPO_PATH
+git clone git@github.com:niranjanshr13/android-termux $HOME/android-termux
+
+cat "source $HOME/android-termux/config/bashrc" > ~/.bashrc

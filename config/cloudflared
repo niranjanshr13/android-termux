@@ -1,0 +1,11 @@
+#!/bin/bash
+if [ ! -e "$HOME/.cloudflared/cert.pem" ]; then
+    cloudflared login
+fi
+
+if [ ! -e "$HOME/.cloudflared/config.yaml" ]; then
+    cloudflared tunnel create $(cat $HOME/device_id)
+    TEMP_TUNNEL=$(ls ~/.cloudflared/*.json)
+    echo "tunnel: $(echo $TEMP_TUNNEL | cut -d '/' -f8 | cut -d '.' -f1)
+    credentials-file: $TEMP_TUNNEL" > ~/.cloudflared/config.yaml
+fi
