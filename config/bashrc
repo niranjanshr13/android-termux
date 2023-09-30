@@ -4,7 +4,7 @@ unset HISTFILE
 # device id
 echo write a device_id now
 read device_id
-echo $device_id $HOME/device_id
+echo $device_id > $HOME/device_id
 
 
 ## termux-setup-storage setup.
