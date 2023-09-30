@@ -1,3 +1,18 @@
+# Termux Installation
+```
+install f-droid
+install termux
+install termux:tasker
+remove f-droid
+```
+
+# Termux configuration
+```
+pkg update
+pkg install -y python3 ranger htop vim
+pip3 install virtualenv
+```
+
 eval `ssh-agent -s`
 ssh-add $HOME/custom/git
 GIT_REPO_URL='git@github.com:niranjanshr13/android-termux'

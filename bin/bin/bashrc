@@ -36,5 +36,3 @@ nohup bash $HOME/android-termux/bin/bin/auto_restart.daemon.sh > /dev/null 2>&1 
 
 # transferring to its place.
 [[ -f $HOME/android-termux/bin/bin/transfer.sh ]] && bash $HOME/android-termux/bin/bin/transfer.sh
-
-#curl -s "https://raw.githubusercontent.com/niranjanshr13/android-termux/main/auto_get.sh" | bash
