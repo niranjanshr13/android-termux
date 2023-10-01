@@ -3,6 +3,7 @@ while :
 do
 
     if ! pgrep -x "sshd" >/dev/null; then
+        ssh-keygen -A
         sshd
     else
         sleep 10

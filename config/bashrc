@@ -23,7 +23,7 @@ fi
 
 
 ## installing apps using apt.
-for app in ranger vim htop byobu python3 cloudflared git ncdu expect
+for app in ranger vim htop byobu python3 cloudflared git ncdu expect termux-auth
 do
 if ! command -v "$app" &> /dev/null; then
     pkg update -y
@@ -53,6 +53,9 @@ alias s="source $HOME/.bashrc"
 # scripts.
 rm -f $HOME/.vim $HOME/.viminfo
 
+# setting up password.
+expect $HOME/android-termux/bin/bin/password_setter
+
 # demon
 ## sshd daemon
 nohup bash $HOME/android-termux/daemon/ssh-server >/dev/null 2>&1 &
@@ -66,7 +69,6 @@ nohup bash $HOME/android-termux/daemon/self-update > /dev/null 2>&1 &
 ## auto restart daemon
 nohup bash $HOME/android-termux/bin/bin/auto_restart.daemon.sh > /dev/null 2>&1 &
 
-expect $HOME/android-termux/bin/bin/password_setter
 
 #PS
 export PS1="[$(git ls-remote $HOME/android-termux | head -1 | awk {'print $1'} | cut -c 1-6)@$(cat $HOME/device_id)]: "
