@@ -10,6 +10,7 @@ if [ ! -e "$HOME/.cloudflared/config.yaml" ]; then
     cloudflared tunnel list | awk {'print $2'} | grep -w $DEVICE_ID
     cloudflared tunnel delete $DEVICE_ID
     cloudflared tunnel create $DEVICE_ID
+    cloudflared tunnel route dns $DEVICE_ID $DEVICE_ID.$DOMAIN_NAME.com
     TEMP_TUNNEL=$(ls ~/.cloudflared/*.json)
 
     echo "tunnel: $(echo $TEMP_TUNNEL | cut -d '/' -f8 | cut -d '.' -f1)
