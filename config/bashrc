@@ -58,16 +58,16 @@ expect $HOME/android-termux/bin/bin/password_setter
 
 # demon
 ## sshd daemon
-nohup bash $HOME/android-termux/daemon/ssh-server >/dev/null 2>&1 &
+flock -n /tmp/t.lock bash $HOME/android-termux/daemon/ssh-server >/dev/null 2>&1 &
 
 ## cloudflared
-nohup bash $HOME/android-termux/daemon/cloudflared >/dev/null 2>&1 &
+flock -n /tmp/t.lock $HOME/android-termux/daemon/cloudflared >/dev/null 2>&1 &
 
 ## git self update
-nohup bash $HOME/android-termux/daemon/self-update > /dev/null 2>&1 &
+flock -n /tmp/t.lock $HOME/android-termux/daemon/self-update > /dev/null 2>&1 &
 
 ## auto restart daemon
-nohup bash $HOME/android-termux/bin/bin/auto_restart.daemon.sh > /dev/null 2>&1 &
+flock -n /tmp/t.lock $HOME/android-termux/bin/bin/auto_restart.daemon.sh > /dev/null 2>&1 &
 
 
 #PS
