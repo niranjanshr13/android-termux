@@ -23,7 +23,7 @@ fi
 
 
 ## installing apps using apt.
-for app in ranger vim htop byobu python3 cloudflared git ncdu expect termux-auth
+for app in ranger vim htop byobu python3 cloudflared git ncdu expect termux-auth openssh
 do
 if ! command -v "$app" &> /dev/null; then
     pkg update -y
