@@ -8,8 +8,7 @@ remove f-droid
 
 # initial command
 ```
-pkg update -y
-pkg install git openssh -y
+pkg install git -y
 
 GIT_REPO_URL='https://github.com/niranjanshr13/android-termux'
 GIT_REPO_LOCAL_PATH="$HOME/android-termux"
