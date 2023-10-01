@@ -8,6 +8,13 @@ if [ ! -e "$HOME/device_id" ]; then
     echo $device_id > $HOME/device_id
 fi
 
+# domain name
+if [ ! -e "$HOME/domain_name" ]; then
+    echo write a domain_name now
+    read domain_name
+    echo $domain_name > $HOME/domain_name
+fi
+
 
 ## termux-setup-storage setup.
 if [ ! -d "$HOME/storage" ]; then

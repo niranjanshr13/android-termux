@@ -3,8 +3,22 @@ if [ ! -e "$HOME/.cloudflared/cert.pem" ]; then
     cloudflared login
 fi
 
+DEVICE_ID=$(cat $HOME/device_id)
+DOMAIN_NAME=$(cat $HOME/domain_name)
+
 if [ ! -e "$HOME/.cloudflared/config.yaml" ]; then
-    cloudflared tunnel create $(cat $HOME/device_id)
+    cloudflared tunnel list | awk {'print $2'} | grep -w $DEVICE_ID
+    cloudflared tunnel delete $DEVICE_ID
+    cloudflared tunnel create $DEVICE_ID
     TEMP_TUNNEL=$(ls ~/.cloudflared/*.json)
-    echo "tunnel: $(echo $TEMP_TUNNEL | cut -d '/' -f8 | cut -d '.' -f1)\ncredentials-file: $TEMP_TUNNEL" > ~/.cloudflared/config.yaml
+
+    echo "tunnel: $(echo $TEMP_TUNNEL | cut -d '/' -f8 | cut -d '.' -f1)
+credentials-file: $TEMP_TUNNEL
+
+ingress:
+  - hostname: $DEVICE_ID.$DOMAIN_NAME
+    service: ssh://localhost:8022
+  - service: http_status:404
+
+" > ~/.cloudflared/config.yaml
 fi
