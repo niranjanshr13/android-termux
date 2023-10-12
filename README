@@ -9,12 +9,12 @@ remove f-droid
 # initial command
 ```
 pkg install git -y
-
 GIT_REPO_URL='https://github.com/niranjanshr13/android-termux'
 GIT_REPO_LOCAL_PATH="$HOME/android-termux"
 git clone $GIT_REPO_URL $GIT_REPO_LOCAL_PATH
 echo "source $HOME/android-termux/config/bashrc" > ~/.bashrc
 ```
 
-
-# test
+# things to do
+- adb connect from termux to the devices
+- a flask app that send command to adb

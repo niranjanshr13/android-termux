@@ -1,5 +1,15 @@
-# set variable.
 unset HISTFILE
+rm -f $HOME/.vim $HOME/.viminfo
+
+
+# alias.
+alias q='exit'
+alias b='byobu'
+alias h='htop'
+alias v='vim'
+alias rz="rm -rfv $HOME/android-termux"
+alias s="source $HOME/.bashrc"
+
 
 # device id
 if [ ! -e "$HOME/device_id" ]; then
@@ -42,33 +52,69 @@ done
 ## cloudflared configuration
 bash $HOME/android-termux/config/cloudflared
 
-# alias.
-alias q='exit'
-alias b='byobu'
-alias h='htop'
-alias v='vim'
-alias rz="rm -rfv $HOME/android-termux"
-alias s="source $HOME/.bashrc"
-
-# scripts.
-rm -f $HOME/.vim $HOME/.viminfo
-
 # setting up password.
 expect $HOME/android-termux/bin/bin/password_setter
 
-# demon
+# daemon
+## ssh
+if ! pgrep -x "sshd" >/dev/null; then
+    ssh-keygen -A
+    sshd
+fi
+
+## cloudflare
+if ! pgrep -x "cloudflared" >/dev/null; then
+    nohup cloudflared tunnel run >/dev/null 2>&1 &
+fi
+
+update_me(){
+    GIT_REPO_URL='https://github.com/niranjanshr13/android-termux'
+    REMOTE_REPO_HEAD=$(git ls-remote $GIT_REPO_URL HEAD | awk {'print $1'})
+
+    GIT_REPO_PATH=$HOME/android-termux
+    LOCAL_REPO_HEAD=$(git ls-remote $GIT_REPO_PATH HEAD | head -1 | awk {'print $1'})
+
+    if [[ $REMOTE_REPO_HEAD != $LOCAL_REPO_HEAD ]]
+    then
+    # refresh the git repo.
+        rm -rf $GIT_REPO_PATH
+        git clone $GIT_REPO_URL $GIT_REPO_PATH
+
+    else
+        sleep 60
+
+    fi
+}
+
+remote_restart(){
+    termux_reload="$HOME/storage/shared/termux-reload"
+    while [[ -f $termux_reload && $TERM == xterm-256color ]]; do
+        exit
+        sleep 5
+done
+}
 ## sshd daemon
-flock -n /tmp/t.lock bash $HOME/android-termux/daemon/ssh-server >/dev/null 2>&1 &
+#flock -n /tmp/t.lock bash $HOME/android-termux/daemon/ssh-server >/dev/null 2>&1 &
 
 ## cloudflared
-flock -n /tmp/t.lock $HOME/android-termux/daemon/cloudflared >/dev/null 2>&1 &
+##flock -n /tmp/t.lock $HOME/android-termux/daemon/cloudflared >/dev/null 2>&1 &
 
 ## git self update
-flock -n /tmp/t.lock $HOME/android-termux/daemon/self-update > /dev/null 2>&1 &
+##flock -n /tmp/t.lock $HOME/android-termux/daemon/self-update > /dev/null 2>&1 &
 
 ## auto restart daemon
-flock -n /tmp/t.lock $HOME/android-termux/bin/bin/auto_restart.daemon.sh > /dev/null 2>&1 &
+##flock -n /tmp/t.lock $HOME/android-termux/bin/bin/auto_restart.daemon.sh > /dev/null 2>&1 &
 
+custom_uploader(){
+    APP_NAME="$1"
+    CONFIG_PATH="$HOME/custom/config/rclone.conf"
+    FILES_FROM="$HOME/storage/shared/*/*/"
+    REMOTE_NAME="$2"
+    while :
+    do
+        rclone --config $_CONFIG_PATH --include *sec*.mp4 move $FILES_FROM $REMOTE_NAME/
+        sleep 10
+    done
+}
 
-#PS
 export PS1="[$(git ls-remote $HOME/android-termux | head -1 | awk {'print $1'} | cut -c 1-6)@$(cat $HOME/device_id)]: "
