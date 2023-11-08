@@ -10,21 +10,12 @@ alias v='vim'
 alias rz="rm -rfv $HOME/android-termux"
 alias s="source $HOME/.bashrc"
 
-
 # device id
 if [ ! -e "$HOME/device_id" ]; then
     echo write a device_id now
     read device_id
     echo $device_id > $HOME/device_id
 fi
-
-# domain name
-if [ ! -e "$HOME/domain_name" ]; then
-    echo write a domain_name now
-    read domain_name
-    echo $domain_name > $HOME/domain_name
-fi
-
 
 ## termux-setup-storage setup.
 if [ ! -d "$HOME/storage" ]; then
@@ -105,16 +96,17 @@ done
 ## auto restart daemon
 ##flock -n /tmp/t.lock $HOME/android-termux/bin/bin/auto_restart.daemon.sh > /dev/null 2>&1 &
 
-custom_uploader(){
-    APP_NAME="$1"
-    CONFIG_PATH="$HOME/custom/config/rclone.conf"
-    FILES_FROM="$HOME/storage/shared/*/*/"
-    REMOTE_NAME="$2"
-    while :
-    do
-        rclone --config $_CONFIG_PATH --include *sec*.mp4 move $FILES_FROM $REMOTE_NAME/
-        sleep 10
-    done
-}
+# custom_uploader(){
+    # APP_NAME="$1"
+    # CONFIG_PATH="$HOME/custom/config/rclone.conf"
+    # FILES_FROM="$HOME/storage/shared/*/*/"
+    # REMOTE_NAME="$2"
+    # while :
+    # do
+        # rclone --config $_CONFIG_PATH --include *sec*.mp4 move $FILES_FROM $REMOTE_NAME/
+        # sleep 10
+    # done
+# }
+
 
 export PS1="[$(git ls-remote $HOME/android-termux | head -1 | awk {'print $1'} | cut -c 1-6)@$(cat $HOME/device_id)]: "
