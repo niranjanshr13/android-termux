@@ -24,13 +24,18 @@ fi
 
 
 ## installing apps using apt.
-for app in ranger vim htop byobu python3 ncdu expect openssh
+for app in vim htop byobu python3 ncdu expect openssh
 do
 if ! command -v "$app" &> /dev/null; then
     pkg update -y
     pkg install -y $app
 fi
 done
+
+if ! command -v "passwd" &> /dev/null; then
+    pkg install termux-auth
+fi
+
 
 ## installing apps using pip3
 for app in virtualenv wormhole
@@ -53,10 +58,6 @@ if ! pgrep -x "sshd" >/dev/null; then
     sshd
 fi
 
-## cloudflare
-##if ! pgrep -x "cloudflared" >/dev/null; then
-##    nohup cloudflared tunnel run >/dev/null 2>&1 &
-##fi
 
 update_me(){
     GIT_REPO_URL='https://github.com/niranjanshr13/android-termux'
@@ -84,29 +85,6 @@ remote_restart(){
         sleep 5
 done
 }
-## sshd daemon
-#flock -n /tmp/t.lock bash $HOME/android-termux/daemon/ssh-server >/dev/null 2>&1 &
-
-## cloudflared
-##flock -n /tmp/t.lock $HOME/android-termux/daemon/cloudflared >/dev/null 2>&1 &
-
-## git self update
-##flock -n /tmp/t.lock $HOME/android-termux/daemon/self-update > /dev/null 2>&1 &
-
-## auto restart daemon
-##flock -n /tmp/t.lock $HOME/android-termux/bin/bin/auto_restart.daemon.sh > /dev/null 2>&1 &
-
-# custom_uploader(){
-    # APP_NAME="$1"
-    # CONFIG_PATH="$HOME/custom/config/rclone.conf"
-    # FILES_FROM="$HOME/storage/shared/*/*/"
-    # REMOTE_NAME="$2"
-    # while :
-    # do
-        # rclone --config $_CONFIG_PATH --include *sec*.mp4 move $FILES_FROM $REMOTE_NAME/
-        # sleep 10
-    # done
-# }
 
 
 export PS1="[$(git ls-remote $HOME/android-termux | head -1 | awk {'print $1'} | cut -c 1-6)@$(cat $HOME/device_id)]: "
