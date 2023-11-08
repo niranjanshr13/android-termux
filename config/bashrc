@@ -33,7 +33,7 @@ fi
 
 
 ## installing apps using apt.
-for app in ranger vim htop byobu python3 git ncdu expect openssh-server
+for app in ranger vim htop byobu python3 ncdu expect openssh
 do
 if ! command -v "$app" &> /dev/null; then
     pkg update -y
